@@ -47,4 +47,11 @@ public class PersistenceService {
       entityManager.remove(pilot1);
     });
   }
+
+  public void update(Pilot pilot) {
+    JPAOperations.doInJPA(this::entityManagerFactory, entityManager -> {
+      Pilot pilot1 = entityManager.merge(pilot);
+      entityManager.persist(pilot1);
+    });
+  }
 }

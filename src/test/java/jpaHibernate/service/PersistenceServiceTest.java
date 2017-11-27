@@ -24,14 +24,9 @@ public class PersistenceServiceTest {
   @Test
   public void testSavePilot() throws Exception {
 
-    // Given
-    Pilot pilot = new Pilot();
-
-    // When
-    persistenceService.save(pilot);
-
     // Then
-    assertThat(pilot.getId()).isNotZero();
+    assertThat(pilot1.getId()).isNotZero();
+    //assertThat(pilot2.getEintritt()).isNotNull();
   }
 
   @Test
@@ -68,9 +63,25 @@ public class PersistenceServiceTest {
     assertThat(pilots.size()).isEqualTo(1);
   }
 
+  @Test
+  public void testChangePilotsName() throws Exception {
+
+    pilot2.setFirstName("Schantal");
+
+    persistenceService.update(pilot2);
+
+    Pilot changed = persistenceService.get(pilot2.getId());
+    assertThat(changed.getFirstName()).isEqualTo("Schantal");
+
+  }
+
   private void initDatabaseWithPilots() {
     pilot1 = new Pilot();
+    pilot1.setFirstName("Boris");
+    pilot1.setLastName("Bruchpilot");
     pilot2 = new Pilot();
+    pilot2.setFirstName("Schari");
+    pilot2.setLastName("Schallmauer");
     persistenceService.save(pilot1);
     persistenceService.save(pilot2);
   }
