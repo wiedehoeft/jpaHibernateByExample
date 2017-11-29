@@ -1,8 +1,6 @@
 package jpaHibernate.model;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Plane extends EntityWithSurrogateKey {
@@ -10,10 +8,11 @@ public class Plane extends EntityWithSurrogateKey {
   private String name;
   private int capacity;
 
-  @ManyToOne
+  @ManyToOne(optional = false, cascade = CascadeType.ALL) //same as nullable false
+  @JoinColumn(name = "planesPerAirport", nullable = false)
   private Airport airport;
 
-  @OneToOne
+  @OneToOne(optional = false, cascade = CascadeType.ALL)
   private Pilot pilot;
 
   public String getName() {

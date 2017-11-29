@@ -11,13 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersistenceServiceTest {
 
-  private PersistenceService persistenceService;
+  private PilotPersistenceService persistenceService;
   private Pilot pilot1;
   private Pilot pilot2;
 
   @Before
   public void setUp() throws Exception {
-    persistenceService = new PersistenceService();
+    persistenceService = new PilotPersistenceService();
     initDatabaseWithPilots();
   }
 
@@ -46,7 +46,7 @@ public class PersistenceServiceTest {
   public void testGetAllPilots() {
 
     // When
-    List<Pilot> pilots = persistenceService.getAllPilots();
+    List<Pilot> pilots = persistenceService.getAll();
 
     // Then
     assertThat(pilots.size()).isEqualTo(2);
@@ -59,7 +59,7 @@ public class PersistenceServiceTest {
     persistenceService.delete(pilot2);
 
     // Then
-    List<Pilot> pilots = persistenceService.getAllPilots();
+    List<Pilot> pilots = persistenceService.getAll();
     assertThat(pilots.size()).isEqualTo(1);
   }
 
