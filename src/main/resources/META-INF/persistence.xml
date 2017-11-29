@@ -4,6 +4,8 @@
              version="2.0">
     <persistence-unit name="airport">
         <class>jpaHibernate.model.Pilot</class>
+        <class>jpaHibernate.model.Airport</class>
+        <class>jpaHibernate.model.Plane</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="org.h2.Driver"></property>
             <property name="hibernate.connection.url" value="jdbc:h2:~/test"></property>

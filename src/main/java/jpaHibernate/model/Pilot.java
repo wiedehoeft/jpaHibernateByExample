@@ -16,6 +16,9 @@ public class Pilot extends EntityWithSurrogateKey {
 
   private int age;
 
+  @OneToOne(mappedBy = "pilot")
+  private Plane plane;
+
   //TODO: Currently not working with H2
   @Temporal(TemporalType.DATE)
   @Column(columnDefinition = " DATE DEFAULT CURRENT_DATE ",
