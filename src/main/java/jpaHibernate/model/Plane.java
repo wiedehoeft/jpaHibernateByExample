@@ -8,11 +8,11 @@ public class Plane extends EntityWithSurrogateKey {
   private String name;
   private int capacity;
 
-  @ManyToOne(optional = false, cascade = CascadeType.ALL) //same as nullable false
-  @JoinColumn(name = "planesPerAirport", nullable = false)
+  @ManyToOne(optional = false) //same as nullable false
+  @JoinColumn(nullable = false)
   private Airport airport;
 
-  @OneToOne(optional = false, cascade = CascadeType.ALL)
+  @OneToOne(optional = false, cascade = CascadeType.PERSIST)
   private Pilot pilot;
 
   public String getName() {
@@ -44,6 +44,7 @@ public class Plane extends EntityWithSurrogateKey {
   }
 
   public void setPilot(Pilot pilot) {
+    pilot.setPlane(this);
     this.pilot = pilot;
   }
 }

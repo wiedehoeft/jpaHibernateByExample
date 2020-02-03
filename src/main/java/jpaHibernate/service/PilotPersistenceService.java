@@ -2,10 +2,10 @@ package jpaHibernate.service;
 
 import jpaHibernate.model.Pilot;
 
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class PilotPersistenceService extends PersistenceService<Pilot>{
+public class PilotPersistenceService extends PersistenceService<Pilot> {
 
   public Pilot get(final long id) {
     return JPAOperations.doInJPA(this::entityManagerFactory, entityManager -> {
@@ -15,8 +15,8 @@ public class PilotPersistenceService extends PersistenceService<Pilot>{
 
   public List<Pilot> getAll() {
     return JPAOperations.doInJPA(this::entityManagerFactory, entityManager -> {
-      Query query = entityManager.createQuery("SELECT p FROM Pilot p");
-      return (List<Pilot>) query.getResultList();
+      TypedQuery<Pilot> query = entityManager.createQuery("SELECT p FROM Pilot p", Pilot.class);
+      return query.getResultList();
     });
   }
 }

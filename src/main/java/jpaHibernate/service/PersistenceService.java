@@ -1,17 +1,15 @@
 package jpaHibernate.service;
 
 import jpaHibernate.model.EntityWithSurrogateKey;
-import jpaHibernate.model.Pilot;
 
-import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public class PersistenceService<E extends EntityWithSurrogateKey> {
 
-  private final EntityManagerFactory emf;
+  private static final EntityManagerFactory emf;
 
-  public PersistenceService() {
+  static {
     emf = Persistence.createEntityManagerFactory("airport");
   }
 

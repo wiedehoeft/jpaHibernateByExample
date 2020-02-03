@@ -46,14 +46,14 @@ public class JPAOperations {
 
 
   public static <T> T doInJPA(
-          Supplier<EntityManagerFactory> factorySupplier,
-          JPATransactionFunction<T> function) {
+    Supplier<EntityManagerFactory> factorySupplier,
+    JPATransactionFunction<T> function) {
     T result = null;
     EntityManager entityManager = null;
     EntityTransaction txn = null;
     try {
       entityManager =
-              factorySupplier.get().createEntityManager();
+        factorySupplier.get().createEntityManager();
       function.beforeTransactionCompletion();
       txn = entityManager.getTransaction();
       txn.begin();
@@ -74,13 +74,13 @@ public class JPAOperations {
   }
 
   public static void doInJPA(
-          Supplier<EntityManagerFactory> factorySupplier,
-          JPATransactionVoidFunction function) {
+    Supplier<EntityManagerFactory> factorySupplier,
+    JPATransactionVoidFunction function) {
     EntityManager entityManager = null;
     EntityTransaction txn = null;
     try {
       entityManager =
-              factorySupplier.get().createEntityManager();
+        factorySupplier.get().createEntityManager();
       function.beforeTransactionCompletion();
       txn = entityManager.getTransaction();
       txn.begin();
@@ -88,19 +88,11 @@ public class JPAOperations {
       if (!txn.getRollbackOnly()) {
         txn.commit();
       } else {
-        try {
-          txn.rollback();
-        } catch (Exception e) {
-//          log.error( "Rollback failure", e );
-        }
+        txn.rollback();
       }
     } catch (Throwable t) {
       if (txn != null && txn.isActive()) {
-        try {
-          txn.rollback();
-        } catch (Exception e) {
-//          log.error( "Rollback failure", e );
-        }
+        txn.rollback();
       }
       throw t;
     } finally {

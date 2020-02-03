@@ -57,4 +57,27 @@ public class Pilot extends EntityWithSurrogateKey {
   public Date getEintritt() {
     return eintritt;
   }
+
+  public Plane getPlane() {
+    return plane;
+  }
+
+  public void setPlane(Plane plane) {
+    this.plane = plane;
+  }
+
+  public void setEintritt(Date eintritt) {
+    this.eintritt = eintritt;
+  }
+
+  @Override
+  public String toString() {
+    return "Pilot{" +
+      "firstName='" + firstName + '\'' +
+      ", lastName='" + lastName + '\'' +
+      ", age=" + age +
+      ", plane=" + plane +
+      ", eintritt=" + eintritt +
+      "} " + super.toString();
+  }
 }

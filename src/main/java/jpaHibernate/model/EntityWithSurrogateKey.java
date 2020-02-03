@@ -17,4 +17,11 @@ public abstract class EntityWithSurrogateKey implements Serializable {
   public void setId(long id) {
     this.id = id;
   }
+
+  @Override
+  public String toString() {
+    return "EntityWithSurrogateKey{" +
+      "id=" + id +
+      '}';
+  }
 }
