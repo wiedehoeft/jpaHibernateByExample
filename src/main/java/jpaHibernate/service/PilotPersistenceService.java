@@ -8,7 +8,6 @@ import java.util.List;
 public class PilotPersistenceService extends PersistenceService<Pilot>{
 
   public Pilot get(final long id) {
-
     return JPAOperations.doInJPA(this::entityManagerFactory, entityManager -> {
       return entityManager.find(Pilot.class, id);
     });

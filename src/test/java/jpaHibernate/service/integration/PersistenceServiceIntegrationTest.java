@@ -1,18 +1,19 @@
 package jpaHibernate.service.integration;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.testcontainers.containers.MySQLContainer;
 
 public class PersistenceServiceIntegrationTest {
+
   public static MySQLContainer mysql = new MySQLContainer();
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeClass() {
     mysql.start();
   }
 
-  @AfterClass
+  @AfterAll
   public static void afterClass() {
     mysql.stop();
   }

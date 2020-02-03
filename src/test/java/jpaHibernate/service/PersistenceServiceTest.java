@@ -1,75 +1,76 @@
 package jpaHibernate.service;
 
 import jpaHibernate.model.Pilot;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PersistenceServiceTest {
+class PersistenceServiceTest {
 
   private PilotPersistenceService persistenceService;
   private Pilot pilot1;
   private Pilot pilot2;
 
-  @Before
-  public void setUp() throws Exception {
+  @BeforeEach
+  void setUp() {
     persistenceService = new PilotPersistenceService();
+    System.out.println("currently pilot size" + persistenceService.getAll().size());
     initDatabaseWithPilots();
   }
 
   @Test
-  public void testSavePilot() throws Exception {
+  public void testSavePilot() {
 
-    // Then
+    // Assert
     assertThat(pilot1.getId()).isNotZero();
-    //assertThat(pilot2.getEintritt()).isNotNull();
   }
 
   @Test
-  public void testGetPilot() throws Exception {
+  public void testGetPilot() {
 
-    // Given
+    // // Arrange
     long pilot2Id = pilot2.getId();
 
-    // When
+    // Act
     Pilot foundPilot = persistenceService.get(pilot2Id);
 
-    // Then
+    // Assert
     assertThat(foundPilot).isNotNull();
   }
 
   @Test
   public void testGetAllPilots() {
 
-    // When
+    // Act
     List<Pilot> pilots = persistenceService.getAll();
 
-    // Then
+    // Assert
     assertThat(pilots.size()).isEqualTo(2);
   }
 
   @Test
   public void testDeletePilot() {
 
-    // When
+    // Act
     persistenceService.delete(pilot2);
 
-    // Then
+    // Assert
     List<Pilot> pilots = persistenceService.getAll();
     assertThat(pilots.size()).isEqualTo(1);
   }
 
   @Test
-  public void testChangePilotsName() throws Exception {
-
+  public void testChangePilotsName() {
+    // Arrange
     pilot2.setFirstName("Schantal");
 
+    // Act
     persistenceService.update(pilot2);
 
+    // Assert
     Pilot changed = persistenceService.get(pilot2.getId());
     assertThat(changed.getFirstName()).isEqualTo("Schantal");
 
@@ -82,6 +83,8 @@ public class PersistenceServiceTest {
     pilot2 = new Pilot();
     pilot2.setFirstName("Schari");
     pilot2.setLastName("Schallmauer");
+    System.out.println("currently pilot size" + persistenceService.getAll().size());
+
     persistenceService.save(pilot1);
     persistenceService.save(pilot2);
   }

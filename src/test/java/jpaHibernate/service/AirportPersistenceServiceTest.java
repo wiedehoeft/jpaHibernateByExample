@@ -2,12 +2,12 @@ package jpaHibernate.service;
 
 import jpaHibernate.model.Airport;
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class AirportPersistenceServiceTest {
+class AirportPersistenceServiceTest {
 
   @Test
-  public void testSaveAirport() throws Exception {
+  void testSaveAirport() {
     Airport airport = new Airport();
 
     new AirportPersistenceService().save(airport);
